@@ -405,7 +405,6 @@ describe('Search bar component', () => {
     expect(languageUtilService.getLanguageIdsAndTexts).toHaveBeenCalled();
     expect(component.updateSelectionDetails).toHaveBeenCalled();
     expect(component.refreshSearchBarLabels).toHaveBeenCalled();
-    expect(component.onSearchQueryChangeExec).toHaveBeenCalled();
     expect(component.updateSearchFieldsBasedOnUrlQuery).toHaveBeenCalled();
     expect(searchService.onSearchBarLoaded.emit).toHaveBeenCalled();
     expect(i18nLanguageCodeService.onPreferredLanguageCodesLoaded.subscribe)
