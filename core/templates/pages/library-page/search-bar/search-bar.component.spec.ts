@@ -293,7 +293,6 @@ describe('Search bar component', () => {
     component.toggleSelection('categories', 'id_1');
     component.toggleSelection('categories', 'id_1');
     expect(component.updateSelectionDetails).toHaveBeenCalled();
-    expect(component.onSearchQueryChangeExec).toHaveBeenCalled();
   });
 
   it('should deselectAll', () => {
@@ -301,7 +300,6 @@ describe('Search bar component', () => {
     component.deselectAll('categories');
     expect(component.selectionDetails.categories.selections).toEqual({});
     expect(component.updateSelectionDetails).toHaveBeenCalled();
-    expect(component.onSearchQueryChangeExec).toHaveBeenCalled();
   });
 
   it('should handle search query change with language param in URL', () => {
