@@ -290,7 +290,6 @@ describe('Search bar component', () => {
 
   it('should toggle selection', () => {
     spyOn(component, 'updateSelectionDetails');
-    spyOn(component, 'onSearchQueryChangeExec');
     component.toggleSelection('categories', 'id_1');
     component.toggleSelection('categories', 'id_1');
     expect(component.updateSelectionDetails).toHaveBeenCalled();
@@ -299,7 +298,6 @@ describe('Search bar component', () => {
 
   it('should deselectAll', () => {
     spyOn(component, 'updateSelectionDetails');
-    spyOn(component, 'onSearchQueryChangeExec');
     component.deselectAll('categories');
     expect(component.selectionDetails.categories.selections).toEqual({});
     expect(component.updateSelectionDetails).toHaveBeenCalled();
