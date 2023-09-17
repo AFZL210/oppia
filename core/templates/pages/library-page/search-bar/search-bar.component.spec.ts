@@ -373,7 +373,6 @@ describe('Search bar component', () => {
     spyOn(languageUtilService, 'getLanguageIdsAndTexts').and.returnValue([]);
     spyOn(component, 'updateSelectionDetails');
     spyOn(component, 'refreshSearchBarLabels');
-    spyOn(component, 'onSearchQueryChangeExec');
     spyOn(component, 'updateSearchFieldsBasedOnUrlQuery');
     spyOn(searchService.onSearchBarLoaded, 'emit');
     spyOn(i18nLanguageCodeService.onPreferredLanguageCodesLoaded, 'subscribe')
