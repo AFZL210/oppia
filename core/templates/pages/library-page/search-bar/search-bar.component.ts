@@ -200,7 +200,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         );
         if (!searchUrlQueryString) {
           return;
-        };        
+        }
         let url = new URL(this.windowRef.nativeWindow.location.toString());
         let siteLangCode: string | null = url.searchParams.get('lang');
         url.search = '?q=' + searchUrlQueryString;
