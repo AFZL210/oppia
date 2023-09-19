@@ -196,7 +196,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       this.selectionDetails.languageCodes.selections
     );
     if (!searchUrlQueryString) {
-      return ;
+      return;
     }
     this.searchService.executeSearchQuery(
       this.searchQuery, this.selectionDetails.categories.selections,
