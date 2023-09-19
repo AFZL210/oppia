@@ -310,14 +310,15 @@ describe('Search bar component', () => {
   it('should handle search query change with language param in URL', () => {
     spyOn(searchService, 'executeSearchQuery').and.callFake(
       (
-        searchQuery: string, categorySelections: object,
-        languageCodeSelections: object, callb: () => void
+          searchQuery: string, categorySelections: object,
+          languageCodeSelections: object, callb: () => void
       ) => {
         callb();
       }
     );
-  
-    spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('search_query');
+
+    spyOn(searchService, 'getSearchUrlQueryString')
+    .and.returnValue('search_query');  
     spyOn(windowRef.nativeWindow.history, 'pushState');
     
     component.searchQuery = 'test_query';
@@ -329,7 +330,8 @@ describe('Search bar component', () => {
     
     windowRef.nativeWindow.location = new URL('http://localhost/not/search/find?lang=en');
     component.onSearchQueryChangeExec();
-    expect(windowRef.nativeWindow.location.href).toEqual('http://localhost/search/find?q=search_query&lang=en');
+    expect(windowRef.nativeWindow.location.href)
+    .toEqual('http://localhost/search/find?q=search_query&lang=en');  
   });
 
   it('should handle search query change with empty search query and language param in URL', () => {
@@ -346,13 +348,13 @@ describe('Search bar component', () => {
   });
 
   it('should handle search query change without language param in URL', () => {
-    spyOn(searchService, 'executeSearchQuery').and.callFake(
-      (
-        searchQuery: string, categorySelections: object,
-        languageCodeSelections: object, callb: () => void
-      ) => {
-        callb();
-      }
+      spyOn(searchService, 'executeSearchQuery').and.callFake(
+        (
+          searchQuery: string, categorySelections: object,
+          languageCodeSelections: object, callb: () => void
+        ) => {
+          callb();
+        }
     );
   
     spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('search_query');
@@ -364,7 +366,7 @@ describe('Search bar component', () => {
     component.onSearchQueryChangeExec();
   
     expect(windowRef.nativeWindow.history.pushState).toHaveBeenCalled();
-    
+
     windowRef.nativeWindow.location = new URL('http://localhost/not/search/find');
     component.onSearchQueryChangeExec();
     expect(windowRef.nativeWindow.location.href).toEqual('http://localhost/search/find?q=search_query');
@@ -374,9 +376,9 @@ describe('Search bar component', () => {
     spyOn(searchService, 'executeSearchQuery');
     spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('');
     spyOn(windowRef.nativeWindow.history, 'pushState');
-  
+
     component.searchQuery = '';
-  
+
     windowRef.nativeWindow.location = new URL('http://localhost/search/find');
     component.onSearchQueryChangeExec();
   
@@ -384,13 +386,13 @@ describe('Search bar component', () => {
     expect(windowRef.nativeWindow.location.href).toEqual('http://localhost/search/find');
   
     windowRef.nativeWindow.history.pushState.calls.reset();
-  
+
     windowRef.nativeWindow.location = new URL('http://localhost/not/search/find');
     component.onSearchQueryChangeExec();
-  
+
     expect(windowRef.nativeWindow.history.pushState).not.toHaveBeenCalled();
     expect(windowRef.nativeWindow.location.href).toEqual('http://localhost/not/search/find');
-  });  
+  });
 
   it('should update search fields based on url query', () => {
     spyOn(component, 'updateSelectionDetails');
