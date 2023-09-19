@@ -334,7 +334,8 @@ describe('Search bar component', () => {
       .toEqual('http://localhost/search/find?q=search_query&lang=en');
   });
 
-  it('should handle search query change with empty search query and language param in URL', () => {
+  it('should handle search query change with empty search query and ' +
+  'language param in URL', () => {
     spyOn(searchService, 'executeSearchQuery');
     spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('');
     spyOn(windowRef.nativeWindow.history, 'pushState');
@@ -358,7 +359,7 @@ describe('Search bar component', () => {
     );
 
     spyOn(searchService, 'getSearchUrlQueryString')
-    .and.returnValue('search_query');
+      .and.returnValue('search_query');
     spyOn(windowRef.nativeWindow.history, 'pushState');
 
     component.searchQuery = 'test_query';
@@ -373,7 +374,8 @@ describe('Search bar component', () => {
     expect(windowRef.nativeWindow.location.href).toEqual('http://localhost/search/find?q=search_query');
   });
 
-  it('should handle search query change with empty query string and without language param in URL', () => {
+  it('should handle search query change with empty query string ' +
+  'and without language param in URL', () => {
     spyOn(searchService, 'executeSearchQuery');
     spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('');
     spyOn(windowRef.nativeWindow.history, 'pushState');
