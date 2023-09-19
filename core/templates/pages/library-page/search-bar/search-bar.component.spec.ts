@@ -36,9 +36,6 @@ import { LanguageUtilService } from 'domain/utilities/language-util.service';
 import { UrlService } from 'services/contextual/url.service';
 import { Subject } from 'rxjs/internal/Subject';
 
-const EMPTY_QUERY_WITHOUT_LANG = "should handle search query change with empty query string and without language param in URL";
-const EMPTY_QUERY_WITH_LANG = "should handle search query change with empty search query and language param in URL";
-
 
 @Pipe({name: 'truncate'})
 class MockTrunctePipe {
@@ -337,7 +334,7 @@ describe('Search bar component', () => {
       .toEqual('http://localhost/search/find?q=search_query&lang=en');
   });
 
-  it(EMPTY_QUERY_WITH_LANG, () => {
+  it('should handle search query change with empty search query and language param in URL', () => {
     spyOn(searchService, 'executeSearchQuery');
     spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('');
     spyOn(windowRef.nativeWindow.history, 'pushState');
@@ -376,7 +373,7 @@ describe('Search bar component', () => {
     expect(windowRef.nativeWindow.location.href).toEqual('http://localhost/search/find?q=search_query');
   });
 
-  it(EMPTY_QUERY_WITHOUT_LANG, () => {
+  it('should handle search query change with empty query string and without language param in URL', () => {
     spyOn(searchService, 'executeSearchQuery');
     spyOn(searchService, 'getSearchUrlQueryString').and.returnValue('');
     spyOn(windowRef.nativeWindow.history, 'pushState');
