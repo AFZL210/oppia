@@ -230,8 +230,9 @@ describe('PlatformFeatureService', () => {
     it('should handle the case when nativeWindow is null', () => {
       platformFeatureService = TestBed
         .inject(PlatformFeatureService);
-      const removeItemSpy = spyOn(windowRef.nativeWindow.sessionStorage
-        , 'removeItem');
+      const removeItemSpy = spyOn(
+        windowRef.nativeWindow.sessionStorage, 'removeItem'
+      );
 
       const mockWindowRef = {
         nativeWindow: null,
