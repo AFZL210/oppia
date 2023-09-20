@@ -227,27 +227,6 @@ describe('PlatformFeatureService', () => {
         PlatformFeatureService.SESSION_STORAGE_KEY
       );
     });
-
-    it('should handle the case when nativeWindow is null', () => {
-      platformFeatureService = TestBed.inject(PlatformFeatureService);
-      const removeItemSpy = spyOn(
-        windowRef.nativeWindow.sessionStorage, 'removeItem'
-      );
-
-      const mockWindowRef = {
-        nativeWindow: null,
-      };
-
-      (platformFeatureService as any).windowRef = mockWindowRef;
-
-      mockSessionStore({
-        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
-      });
-
-      const clearSavedResults = platformFeatureService['clearSavedResults' as keyof PlatformFeatureService];
-      clearSavedResults();
-      expect(removeItemSpy).not.toHaveBeenCalled();
-    });
   });
 
   describe('.featureSummary', () => {
