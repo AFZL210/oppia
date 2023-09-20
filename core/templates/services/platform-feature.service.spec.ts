@@ -219,8 +219,8 @@ describe('PlatformFeatureService', () => {
       mockSessionStore({
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
-
-      (platformFeatureService['clearSavedResults' as keyof PlatformFeatureService])();
+      let jJ = 'clearSavedResults';
+      (platformFeatureService[`${jJ}` as keyof PlatformFeatureService])();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         PlatformFeatureService.SESSION_STORAGE_KEY
