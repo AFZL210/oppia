@@ -209,8 +209,7 @@ describe('PlatformFeatureService', () => {
   });
 
   describe('clearSavedResults', () => {
-    it('should remove item from sessionStorage if '
-      + 'nativeWindow is available', () => {
+    it('should remove sessionStorage item if nativeWindow exists', () => {
       platformFeatureService = TestBed.inject(PlatformFeatureService);
 
       const removeItemSpy = spyOn(
@@ -231,7 +230,8 @@ describe('PlatformFeatureService', () => {
     it('should handle the case when nativeWindow is null', () => {
       platformFeatureService = TestBed
         .inject(PlatformFeatureService);
-      const removeItemSpy = spyOn(windowRef.nativeWindow.sessionStorage, 'removeItem');
+      const removeItemSpy = spyOn(windowRef.nativeWindow.sessionStorage
+        , 'removeItem');
 
       const mockWindowRef = {
         nativeWindow: null,
@@ -243,9 +243,9 @@ describe('PlatformFeatureService', () => {
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-        platformFeatureService.clearSavedResults();
-        expect(removeItemSpy).not.toHaveBeenCalled();
-  });
+      platformFeatureService.clearSavedResults();
+      expect(removeItemSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe('.featureSummary', () => {
