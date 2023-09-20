@@ -61,6 +61,12 @@ describe('PlatformFeatureService', () => {
     PlatformFeatureService.initializationPromise = null;
   };
 
+  function getServicePrivateMembers(service: any): any {
+    return {
+      clearSavedResults: service.clearSavedResults.bind(service),
+    };
+  }
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -209,24 +215,36 @@ describe('PlatformFeatureService', () => {
   });
 
   describe('clearSavedResults', () => {
-    it('should remove sessionStorage item if nativeWindow exists', () => {
+    let platformFeatureService: PlatformFeatureService;
+    let privateMembers: any; // This will hold the private members of the service.
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        // Your testing configuration
+      });
       platformFeatureService = TestBed.inject(PlatformFeatureService);
 
+      // Use the helper function to get access to private members
+      privateMembers = getServicePrivateMembers(platformFeatureService);
+    });
+
+    it('should remove sessionStorage item if nativeWindow exists', () => {
       const removeItemSpy = spyOn(
-        windowRef.nativeWindow.sessionStorage, 'removeItem'
+        platformFeatureService.windowRef.nativeWindow.sessionStorage, 'removeItem'
       );
 
       mockSessionStore({
-        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
+        [privateMembers.SESSION_STORAGE_KEY]: 'someValue',
       });
-      let jJ = 'clearSavedResults';
-      (platformFeatureService[`${jJ}` as keyof PlatformFeatureService])();
+
+      privateMembers.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
-        PlatformFeatureService.SESSION_STORAGE_KEY
+        privateMembers.SESSION_STORAGE_KEY
       );
     });
   });
+
 
   describe('.featureSummary', () => {
     it('should return correct values of feature flags', fakeAsync(() => {
