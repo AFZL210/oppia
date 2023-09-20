@@ -165,7 +165,8 @@ export class PlatformFeatureService {
    * Clears results from the sessionStorage, if any.
    */
   private clearSavedResults(): void {
-    if (this.windowRef.nativeWindow && this.windowRef.nativeWindow.sessionStorage) {
+    if (this.windowRef.nativeWindow &&
+      this.windowRef.nativeWindow.sessionStorage) {
       this.windowRef.nativeWindow.sessionStorage.removeItem(
         PlatformFeatureService.SESSION_STORAGE_KEY
       );
