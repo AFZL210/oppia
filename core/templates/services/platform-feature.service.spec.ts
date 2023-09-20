@@ -220,8 +220,7 @@ describe('PlatformFeatureService', () => {
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      const clearSavedResults = platformFeatureService['clearSavedResults' as keyof PlatformFeatureService];
-      clearSavedResults();
+      (platformFeatureService['clearSavedResults' as keyof PlatformFeatureService])();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         PlatformFeatureService.SESSION_STORAGE_KEY
