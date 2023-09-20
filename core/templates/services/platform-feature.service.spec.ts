@@ -220,7 +220,8 @@ describe('PlatformFeatureService', () => {
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      platformFeatureService['clearSavedResults' as keyof PlatformFeatureService]();
+      const clearSavedResults = platformFeatureService['clearSavedResults' as keyof PlatformFeatureService];
+      clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         PlatformFeatureService.SESSION_STORAGE_KEY
@@ -243,7 +244,8 @@ describe('PlatformFeatureService', () => {
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      platformFeatureService['clearSavedResults' as keyof PlatformFeatureService]();
+      const clearSavedResults = platformFeatureService['clearSavedResults' as keyof PlatformFeatureService];
+      clearSavedResults();
       expect(removeItemSpy).not.toHaveBeenCalled();
     });
   });
