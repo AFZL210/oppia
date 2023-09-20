@@ -208,6 +208,44 @@ describe('PlatformFeatureService', () => {
     }));
   });
 
+  describe('clearSavedResults', () => {
+    it('should remove item from sessionStorage if nativeWindow is available', () => {
+      platformFeatureService = TestBed.inject(PlatformFeatureService);
+
+      const removeItemSpy = spyOn(
+        windowRef.nativeWindow.sessionStorage, 'removeItem'
+      );
+
+      mockSessionStore({
+        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
+      });
+
+      platformFeatureService.clearSavedResults();
+
+      expect(removeItemSpy).toHaveBeenCalledWith(
+        PlatformFeatureService.SESSION_STORAGE_KEY
+      );
+    });
+
+    it('should handle the case when nativeWindow is null', () => {
+      platformFeatureService = TestBed.inject(PlatformFeatureService);
+      const removeItemSpy = spyOn(windowRef.nativeWindow.sessionStorage, 'removeItem');
+
+      const mockWindowRef = {
+        nativeWindow: null,
+      };
+
+      platformFeatureService.windowRef = mockWindowRef;
+
+      mockSessionStore({
+        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
+      });
+
+      platformFeatureService.clearSavedResults();
+      expect(removeItemSpy).not.toHaveBeenCalled();
+  });
+  })
+
   describe('.featureSummary', () => {
     it('should return correct values of feature flags', fakeAsync(() => {
       platformFeatureService = TestBed.inject(PlatformFeatureService);
