@@ -220,7 +220,7 @@ describe('PlatformFeatureService', () => {
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      platformFeatureService.clearSavedResults();
+      platformFeatureService['clearSavedResults' as keyof PlatformFeatureService]();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         PlatformFeatureService.SESSION_STORAGE_KEY
@@ -237,13 +237,13 @@ describe('PlatformFeatureService', () => {
         nativeWindow: null,
       };
 
-      platformFeatureService.windowRef = mockWindowRef;
+      (platformFeatureService as any).windowRef = mockWindowRef;
 
       mockSessionStore({
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      platformFeatureService.clearSavedResults();
+      platformFeatureService['clearSavedResults' as keyof PlatformFeatureService]();
       expect(removeItemSpy).not.toHaveBeenCalled();
     });
   });
