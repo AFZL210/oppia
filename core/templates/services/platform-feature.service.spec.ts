@@ -217,13 +217,11 @@ describe('PlatformFeatureService', () => {
       );
 
       mockSessionStore({
-        // This throws Error. We need to suppress this error because test
-        // @ts-ignore
+        // @ts-ignore: This throws "S". We need to suppress this error because we are edge case.
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      // This throws Error. We need to suppress this error because test
-      // @ts-ignore
+      // @ts-ignore: This throws "S". We need to suppress this error because we are edge case.
       platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
