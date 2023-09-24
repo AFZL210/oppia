@@ -218,19 +218,22 @@ describe('PlatformFeatureService', () => {
 
       mockSessionStore({
         // This throws "TS2341". We need to suppress this error because
-        // the method 'SESSION_STORAGE_KEY' is private and only accessible within the class.
+        // The 'SESSION_STORAGE_KEY' member is private
+        // and can only be accessed within the class.
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
       // This throws "TS2341". We need to suppress this error because
-      // the method 'clearSavedResults' is private and only accessible within the class.
+      // The 'clearSavedResults' method is private
+      // and can only be accessed within the class.
       // @ts-ignore
       platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         // This throws "TS2341". We need to suppress this error because
-        // the method 'SESSION_STORAGE_KEY' is private and only accessible within the class.
+        // The 'SESSION_STORAGE_KEY' member is private
+        // and can only be accessed within the class.
         // @ts-ignore
         PlatformFeatureService.SESSION_STORAGE_KEY
       );
@@ -250,7 +253,8 @@ describe('PlatformFeatureService', () => {
 
       mockSessionStore({
         // This throws "TS2341". We need to suppress this error because
-        // the method 'SESSION_STORAGE_KEY' is private and only accessible within the class.
+        // The 'SESSION_STORAGE_KEY' member is private
+        // and can only be accessed within the class.
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
