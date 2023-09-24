@@ -217,14 +217,12 @@ describe('PlatformFeatureService', () => {
       );
 
       mockSessionStore({
-        // This throws "Type '($provide) => string' is not assignable to"
-        // We need to suppress this error because "hi"
+        // This throws "...". We need to suppress this error because ...
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      // This throws "Type '($provide) => string' is not assignable to"
-      // We need to suppress this error because "hi"
+      // This throws "...". We need to suppress this error because ...
       // @ts-ignore
       platformFeatureService.clearSavedResults();
 
