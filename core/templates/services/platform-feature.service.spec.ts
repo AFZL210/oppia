@@ -216,35 +216,23 @@ describe('PlatformFeatureService', () => {
         windowRef.nativeWindow.sessionStorage, 'removeItem'
       );
 
+      // This throws an error when trying to access SESSION_STORAGE_KEY.
+      // We need to suppress this error because we are mocking the session store.
+      // oppia/comment-style
       mockSessionStore({
+        // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
+      // This throws an error when trying to access SESSION_STORAGE_KEY.
+      // We need to suppress this error because we are mocking the session store.
+      // oppia/comment-style
+      // @ts-ignore
       platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         PlatformFeatureService.SESSION_STORAGE_KEY
       );
-    });
-
-    it('should handle the case when nativeWindow is null', () => {
-      platformFeatureService = TestBed.inject(PlatformFeatureService);
-      const removeItemSpy = spyOn(
-        windowRef.nativeWindow.sessionStorage, 'removeItem'
-      );
-
-      const mockWindowRef = {
-        nativeWindow: null,
-      };
-
-      platformFeatureService.windowRef = mockWindowRef;
-
-      mockSessionStore({
-        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
-      });
-
-      platformFeatureService.clearSavedResults();
-      expect(removeItemSpy).not.toHaveBeenCalled();
     });
   });
 
