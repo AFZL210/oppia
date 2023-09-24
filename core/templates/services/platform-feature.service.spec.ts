@@ -61,12 +61,6 @@ describe('PlatformFeatureService', () => {
     PlatformFeatureService.initializationPromise = null;
   };
 
-  function getServicePrivateMembers(service: any): any {
-    return {
-      clearSavedResults: service.clearSavedResults.bind(service),
-    };
-  }
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -215,36 +209,44 @@ describe('PlatformFeatureService', () => {
   });
 
   describe('clearSavedResults', () => {
-    let platformFeatureService: PlatformFeatureService;
-    let privateMembers: any; // This will hold the private members of the service.
-
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        // Your testing configuration
-      });
+    it('should remove sessionStorage item if nativeWindow exists', () => {
       platformFeatureService = TestBed.inject(PlatformFeatureService);
 
-      // Use the helper function to get access to private members
-      privateMembers = getServicePrivateMembers(platformFeatureService);
-    });
-
-    it('should remove sessionStorage item if nativeWindow exists', () => {
       const removeItemSpy = spyOn(
-        platformFeatureService.windowRef.nativeWindow.sessionStorage, 'removeItem'
+        windowRef.nativeWindow.sessionStorage, 'removeItem'
       );
 
       mockSessionStore({
-        [privateMembers.SESSION_STORAGE_KEY]: 'someValue',
+        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      privateMembers.clearSavedResults();
+      platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
-        privateMembers.SESSION_STORAGE_KEY
+        PlatformFeatureService.SESSION_STORAGE_KEY
       );
     });
-  });
 
+    it('should handle the case when nativeWindow is null', () => {
+      platformFeatureService = TestBed.inject(PlatformFeatureService);
+      const removeItemSpy = spyOn(
+        windowRef.nativeWindow.sessionStorage, 'removeItem'
+      );
+
+      const mockWindowRef = {
+        nativeWindow: null,
+      };
+
+      platformFeatureService.windowRef = mockWindowRef;
+
+      mockSessionStore({
+        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
+      });
+
+      platformFeatureService.clearSavedResults();
+      expect(removeItemSpy).not.toHaveBeenCalled();
+    });
+  });
 
   describe('.featureSummary', () => {
     it('should return correct values of feature flags', fakeAsync(() => {
