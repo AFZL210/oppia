@@ -219,16 +219,12 @@ describe('PlatformFeatureService', () => {
       mockSessionStore({
         // This throw "Type '($provide) => string' is not assignable to
         // type 'string'". this need to suppress because typescript
-        // expects the module name to be an string but a custom module is
-        // needed here.
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
       // This throw "Type '($provide) => string' is not assignable to
       // type 'string'". this need to suppress because typescript
-      // expects the module name to be an string but a custom module is
-      // needed here.
       // @ts-ignore
       platformFeatureService.clearSavedResults();
 
