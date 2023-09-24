@@ -216,17 +216,13 @@ describe('PlatformFeatureService', () => {
         windowRef.nativeWindow.sessionStorage, 'removeItem'
       );
 
-      // This throws an error when trying to access SESSION_STORAGE_KEY.
-      // We need to suppress this error because we are mocking the session store.
-      // oppia/comment-style
       mockSessionStore({
+        // This throws Error. We need to suppress this error because test
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      // This throws an error when trying to access SESSION_STORAGE_KEY.
-      // We need to suppress this error because we are mocking the session store.
-      // oppia/comment-style
+      // This throws Error. We need to suppress this error because test
       // @ts-ignore
       platformFeatureService.clearSavedResults();
 
