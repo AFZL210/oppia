@@ -217,18 +217,49 @@ describe('PlatformFeatureService', () => {
       );
 
       mockSessionStore({
-        // This throws "...". We need to suppress this error because ...
+        // This throws "TS2341". We need to suppress this error because
+        // the method 'SESSION_STORAGE_KEY' is private and only accessible within the class.
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      // This throws "...". We need to suppress this error because ...
+      // This throws "TS2341". We need to suppress this error because
+      // the method 'clearSavedResults' is private and only accessible within the class.
       // @ts-ignore
       platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
+        // This throws "TS2341". We need to suppress this error because
+        // the method 'SESSION_STORAGE_KEY' is private and only accessible within the class.
+        // @ts-ignore
         PlatformFeatureService.SESSION_STORAGE_KEY
       );
+    });
+
+    it('should handle the case when nativeWindow is null', () => {
+      platformFeatureService = TestBed.inject(PlatformFeatureService);
+      const removeItemSpy = spyOn(
+        windowRef.nativeWindow.sessionStorage, 'removeItem'
+      );
+
+      const mockWindowRef = {
+        nativeWindow: null,
+      };
+
+      platformFeatureService.windowRef = mockWindowRef;
+
+      mockSessionStore({
+        // This throws "TS2341". We need to suppress this error because
+        // the method 'SESSION_STORAGE_KEY' is private and only accessible within the class.
+        // @ts-ignore
+        [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
+      });
+
+      // This throws "TS2341". We need to suppress this error because
+      // the method 'clearSavedResults' is private and only accessible within the class.
+      // @ts-ignore
+      platformFeatureService.clearSavedResults();
+      expect(removeItemSpy).not.toHaveBeenCalled();
     });
   });
 
