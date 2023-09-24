@@ -260,7 +260,8 @@ describe('PlatformFeatureService', () => {
       });
 
       // This throws "TS2341". We need to suppress this error because
-      // the method 'clearSavedResults' is private and only accessible within the class.
+      // The 'clearSavedResults' method is private
+      // and can only be accessed within the class.
       // @ts-ignore
       platformFeatureService.clearSavedResults();
       expect(removeItemSpy).not.toHaveBeenCalled();
