@@ -217,11 +217,19 @@ describe('PlatformFeatureService', () => {
       );
 
       mockSessionStore({
-        // @ts-ignore: This throws "S". We need to suppress this error because we are edge case.
+        // This throw "Type '($provide) => string' is not assignable to
+        // type 'string'". this need to suppress because typescript
+        // expects the module name to be an string but a custom module is
+        // needed here.
+        // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
-      // @ts-ignore: This throws "S". We need to suppress this error because we are edge case.
+      // This throw "Type '($provide) => string' is not assignable to
+      // type 'string'". this need to suppress because typescript
+      // expects the module name to be an string but a custom module is
+      // needed here.
+      // @ts-ignore
       platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
