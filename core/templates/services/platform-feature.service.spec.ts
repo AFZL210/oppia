@@ -219,21 +219,21 @@ describe('PlatformFeatureService', () => {
       mockSessionStore({
         // This throws "TS2341". We need to suppress this error because
         // The 'SESSION_STORAGE_KEY' member is private
-        // and can only be accessed within the class 'PlatformFeatureService'
+        // and can only be accessed within the class 'PlatformFeatureService'.
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
       // This throws "TS2341". We need to suppress this error because
       // The 'clearSavedResults' method is private
-      // and can only be accessed within the class 'PlatformFeatureService'
+      // and can only be accessed within the class 'PlatformFeatureService'.
       // @ts-ignore
       platformFeatureService.clearSavedResults();
 
       expect(removeItemSpy).toHaveBeenCalledWith(
         // This throws "TS2341". We need to suppress this error because
         // The 'SESSION_STORAGE_KEY' member is private
-        // and can only be accessed within the class 'PlatformFeatureService'
+        // and can only be accessed within the class 'PlatformFeatureService'.
         // @ts-ignore
         PlatformFeatureService.SESSION_STORAGE_KEY
       );
@@ -251,21 +251,21 @@ describe('PlatformFeatureService', () => {
 
       // This throws "TS2341". We need to suppress this error because
       // The 'windowRef' member is private
-      // and can only be accessed within the class 'PlatformFeatureService'
+      // and can only be accessed within the class 'PlatformFeatureService'.
       // @ts-ignore
       platformFeatureService.windowRef = mockWindowRef;
 
       mockSessionStore({
         // This throws "TS2341". We need to suppress this error because
         // The 'SESSION_STORAGE_KEY' member is private
-        // and can only be accessed within the class 'PlatformFeatureService'
+        // and can only be accessed within the class 'PlatformFeatureService'.
         // @ts-ignore
         [PlatformFeatureService.SESSION_STORAGE_KEY]: 'someValue',
       });
 
       // This throws "TS2341". We need to suppress this error because
       // The 'clearSavedResults' method is private
-      // and can only be accessed within the class 'PlatformFeatureService'
+      // and can only be accessed within the class 'PlatformFeatureService'.
       // @ts-ignore
       platformFeatureService.clearSavedResults();
       expect(removeItemSpy).not.toHaveBeenCalled();
