@@ -2999,16 +2999,11 @@ def get_user_exploration_data(
         and exp_user_data.draft_change_list else None)
     draft_change_list_id = (
         exp_user_data.draft_change_list_id if exp_user_data else 0)
-    exploration_email_preferences: user_domain.UserExplorationPrefsDict = {
-        'mute_feedback_notifications': False,
-        'mute_suggestion_notifications': False
-    }
 
     editor_dict = exp_domain.AugmentedUserExplorationData(
         exploration=exploration,
         states=states,
-        rights=rights_manager.get_exploration_rights(exploration_id).to_dict(),
-        exploration_email_preferences=exploration_email_preferences,
+        rights=rights_manager.get_exploration_rights(exploration_id).to_dict()
     ).to_dict()
 
     if user_id is not None:

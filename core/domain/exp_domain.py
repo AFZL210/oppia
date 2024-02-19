@@ -5811,7 +5811,7 @@ class AugmentedUserExplorationDataDict(TypedDict):
     show_state_editor_tutorial_on_load: bool
     show_state_translation_tutorial_on_load: bool
     is_version_of_draft_valid: Optional[bool]
-    draft_changes: Dict[str, str] | None
+    draft_changes: Optional[Dict[str, str]]
     email_preferences: user_domain.UserExplorationPrefsDict
     next_content_id_index: int
     exploration_metadata: ExplorationMetadataDict
@@ -5820,17 +5820,22 @@ class AugmentedUserExplorationDataDict(TypedDict):
 class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
     """Domain object for an User Exploration data."""
 
+    default_exploration_email_preferences: user_domain.UserExplorationPrefsDict = {
+        'mute_feedback_notifications': False,
+        'mute_suggestion_notifications': False
+    }
+
     def __init__(
         self,
         exploration: Exploration,
         states: Dict[str, state_domain.StateDict],
         rights: rights_domain.ActivityRightsDict,
-        exploration_email_preferences: user_domain.UserExplorationPrefsDict,
-        draft_changes: Dict[str, str] | None = None,
+        exploration_email_preferences: user_domain.UserExplorationPrefsDict = default_exploration_email_preferences, # pylint: disable=line-too-long
         show_state_editor_tutorial_on_load: bool = False,
         show_state_translation_tutorial_on_load: bool = False,
         draft_change_list_id: int = 0,
         is_valid_draft_version: Optional[bool] = False,
+        draft_changes: Optional[Dict[str, str]] = None,
     ) -> None:
         """Initializes a AugmentedUserExplorationData domain object.
 
@@ -5842,14 +5847,14 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
                 representation of activity rights.
             exploration_email_preferences: UserExplorationPrefsDict. Dictionary
                 representation of UserExplorationPrefs.
-            draft_changes: Dict[str, str]. A dict of draft changes.
             show_state_editor_tutorial_on_load: bool. Whether to show the
                 tutorial when the exploration editor loads.
             show_state_translation_tutorial_on_load: bool. Whether to show the
                 tutorial when the translation tab loads.
             draft_change_list_id: int. The id of draf change list.
-            is_valid_draft_version: bool. Whether the given draft version
+            is_valid_draft_version: Optional[bool]. Whether the given draft version
                 is valid or not.
+            draft_changes: Optional[Dict[str, str]]. A dict of draft changes.
         """
         self.exploration = exploration
         self.draft_change_list_id = draft_change_list_id
