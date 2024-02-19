@@ -5820,7 +5820,7 @@ class AugmentedUserExplorationDataDict(TypedDict):
 class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
     """Domain object for an User Exploration data."""
 
-    default_exp_email_preferences: user_domain.UserExplorationPrefsDict = {
+    default_exp_email_pref: user_domain.UserExplorationPrefsDict = {
         'mute_feedback_notifications': False,
         'mute_suggestion_notifications': False
     }
@@ -5830,7 +5830,7 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
         exploration: Exploration,
         states: Dict[str, state_domain.StateDict],
         rights: rights_domain.ActivityRightsDict,
-        exp_email_preferences: Optional[user_domain.UserExplorationPrefsDict] = None,
+        exp_email_pref: Optional[user_domain.UserExplorationPrefsDict] = None, # pylint: disable=line-too-long
         show_state_editor_tutorial_on_load: bool = False,
         show_state_translation_tutorial_on_load: bool = False,
         draft_change_list_id: int = 0,
@@ -5845,7 +5845,7 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
                 the State object.
             rights: rights_domain.ActivityRightsDict. Dictionary
                 representation of activity rights.
-            exp_email_preferences: Optional[user_domain.UserExplorationPrefsDict].
+            exp_email_pref: Optional[user_domain.UserExplorationPrefsDict].
                 Dictionary representation of UserExplorationPrefs.
             show_state_editor_tutorial_on_load: bool. Whether to show the
                 tutorial when the exploration editor loads.
@@ -5864,10 +5864,10 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
         self.states = states
         self.rights = rights
         self.is_valid_draft_version = is_valid_draft_version
-        if exp_email_preferences is None:
-            self.exploration_email_preferences = self.default_exp_email_preferences
+        if exp_email_pref is None:
+            self.exploration_email_preferences = self.default_exp_email_pref
         else:
-            self.exploration_email_preferences = exp_email_preferences # pylint: disable=line-too-long
+            self.exploration_email_preferences = exp_email_pref # pylint: disable=line-too-long
 
     def to_dict(self) -> AugmentedUserExplorationDataDict:
         """Gets the dict representation of AugmentedUserExplorationData
