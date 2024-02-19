@@ -51,6 +51,10 @@ from core.domain import html_validation_service  # pylint: disable=invalid-impor
 from core.domain import interaction_registry  # pylint: disable=invalid-import-from # isort:skip
 from core.platform import models  # pylint: disable=invalid-import-from # isort:skip
 
+if TYPE_CHECKING:
+    from core.domain import rights_domain
+    from core.domain import user_domain
+
 # TODO(#14537): Refactor this file and remove imports marked
 # with 'invalid-import-from'.
 
@@ -59,10 +63,6 @@ if MYPY:  # pragma: no cover
     from mypy_imports import exp_models
 
 (exp_models,) = models.Registry.import_models([models.Names.EXPLORATION])
-
-if TYPE_CHECKING:
-    from core.domain import rights_domain
-    from core.domain import user_domain
 
 # Do not modify the values of these constants. This is to preserve backwards
 # compatibility with previous change dicts.
@@ -5820,7 +5820,7 @@ class AugmentedUserExplorationDataDict(TypedDict):
 class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
     """Domain object for an User Exploration data."""
 
-    default_exploration_email_preferences: user_domain.UserExplorationPrefsDict = {
+    default_exp_email_preferences: user_domain.UserExplorationPrefsDict = {
         'mute_feedback_notifications': False,
         'mute_suggestion_notifications': False
     }
@@ -5830,7 +5830,7 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
         exploration: Exploration,
         states: Dict[str, state_domain.StateDict],
         rights: rights_domain.ActivityRightsDict,
-        exploration_email_preferences: user_domain.UserExplorationPrefsDict = default_exploration_email_preferences, # pylint: disable=line-too-long
+        exploration_email_preferences: user_domain.UserExplorationPrefsDict = default_exp_email_preferences, # pylint: disable=line-too-long
         show_state_editor_tutorial_on_load: bool = False,
         show_state_translation_tutorial_on_load: bool = False,
         draft_change_list_id: int = 0,
@@ -5852,8 +5852,8 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
             show_state_translation_tutorial_on_load: bool. Whether to show the
                 tutorial when the translation tab loads.
             draft_change_list_id: int. The id of draf change list.
-            is_valid_draft_version: Optional[bool]. Whether the given draft version
-                is valid or not.
+            is_valid_draft_version: Optional[bool]. Whether the given draft
+                version is valid or not.
             draft_changes: Optional[Dict[str, str]]. A dict of draft changes.
         """
         self.exploration = exploration
