@@ -5812,7 +5812,7 @@ class AugmentedUserExplorationDataDict(TypedDict):
     show_state_translation_tutorial_on_load: bool
     is_version_of_draft_valid: Optional[bool]
     draft_changes: Optional[Dict[str, str]]
-    email_preferences: user_domain.UserExplorationPrefsDict
+    email_preferences: Optional[user_domain.UserExplorationPrefsDict]
     next_content_id_index: int
     exploration_metadata: ExplorationMetadataDict
 
@@ -5830,7 +5830,7 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
         exploration: Exploration,
         states: Dict[str, state_domain.StateDict],
         rights: rights_domain.ActivityRightsDict,
-        exploration_email_preferences: user_domain.UserExplorationPrefsDict = default_exp_email_preferences, # pylint: disable=line-too-long
+        exp_email_preferences: Optional[user_domain.UserExplorationPrefsDict] = None,
         show_state_editor_tutorial_on_load: bool = False,
         show_state_translation_tutorial_on_load: bool = False,
         draft_change_list_id: int = 0,
@@ -5845,8 +5845,8 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
                 the State object.
             rights: rights_domain.ActivityRightsDict. Dictionary
                 representation of activity rights.
-            exploration_email_preferences: UserExplorationPrefsDict. Dictionary
-                representation of UserExplorationPrefs.
+            exp_email_preferences: Optional[user_domain.UserExplorationPrefsDict].
+                Dictionary representation of UserExplorationPrefs.
             show_state_editor_tutorial_on_load: bool. Whether to show the
                 tutorial when the exploration editor loads.
             show_state_translation_tutorial_on_load: bool. Whether to show the
@@ -5861,10 +5861,13 @@ class AugmentedUserExplorationData(translation_domain.BaseTranslatableObject):
         self.show_state_editor_tutorial_on_load = show_state_editor_tutorial_on_load # pylint: disable=line-too-long
         self.show_state_translation_tutorial_on_load = show_state_translation_tutorial_on_load # pylint: disable=line-too-long
         self.draft_changes = draft_changes
-        self.exploration_email_preferences = exploration_email_preferences # pylint: disable=line-too-long
         self.states = states
         self.rights = rights
         self.is_valid_draft_version = is_valid_draft_version
+        if exp_email_preferences is None:
+            self.exploration_email_preferences = self.default_exp_email_preferences
+        else:
+            self.exploration_email_preferences = exp_email_preferences # pylint: disable=line-too-long
 
     def to_dict(self) -> AugmentedUserExplorationDataDict:
         """Gets the dict representation of AugmentedUserExplorationData
