@@ -104,7 +104,7 @@ export class ThumbnailUploaderComponent implements OnInit, OnChanges {
           this.contextService.getEntityId()
         );
       this.uploadedImage = this.editableThumbnailDataUrl;
-      this.thumbnailIsLoading = true;
+      this.thumbnailIsLoading = false;
     }
   }
 
