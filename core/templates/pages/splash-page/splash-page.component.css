@@ -102,6 +102,18 @@
   z-index: 10;
 }
 
+.splash-page .oppia-splash-button-container .access-android-btn {
+  background-color: white;
+  border: 1px solid #00645c;
+  border-radius: 4px;
+  color: #00645c;
+}
+
+.splash-page .oppia-splash-button-container .access-android-btn:hover {
+  background-color: #3d9991;
+  color: white;
+}
+
 @media (min-width: 768px) {
   .splash-page .oppia-splash-button-browse {
     left: -webkit-calc(50% - 200px);
